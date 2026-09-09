@@ -2,6 +2,10 @@ img {
   transition: transform 0.3s ease, border-radius 0.3s ease;
 }
 
+img:hover { 
+    transform: scale(1.2); 
+}
+
 .featured {
   border-radius: 16px;
   transform: scale(1.5);
