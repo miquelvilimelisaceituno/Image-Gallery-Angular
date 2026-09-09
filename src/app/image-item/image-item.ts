@@ -9,5 +9,6 @@ import { Image } from '../interfaces/image-interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImageItem {
-  image = input.required<Image>()
+  image = input.required<Image>();
+  isFeatured = input(false);
 }
