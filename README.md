@@ -1,59 +1,39 @@
-# ItSprint4ImagesGallery
+# Image Gallery — Angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.0-next.6.
+Ejercicio **S4.03** de la especialización frontend: una galería de imágenes construida con Angular usando **standalone components**, **Signals** y el nuevo control de flujo de plantillas (`@for`).
 
-## Development server
+## Descripción
 
-To start a local development server, run:
+La aplicación muestra una galería de imágenes (datos estáticos de [picsum.photos](https://picsum.photos/)) donde la primera imagen del listado aparece destacada visualmente respecto al resto.
 
-```bash
-ng serve
-```
+## Arquitectura de componentes
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- **`App`** (raíz): integra `Gallery` mediante su selector `<app-gallery>`.
+- **`Gallery`** (contenedor): mantiene el array de imágenes (`Image[]`) y lo recorre con un bloque `@for`, pasando cada imagen al componente hijo mediante property binding y marcando la primera con `isFeatured = true`.
+- **`ImageItem`** (presentacional): recibe cada imagen a través de un input signal obligatorio (`input.required<Image>()`) y un input opcional `isFeatured` (`input(false)`). Usa `ChangeDetectionStrategy.OnPush` para optimizar la detección de cambios, y aplica un class binding condicional (`[class.featured]`) que resalta visualmente la imagen destacada (tamaño aumentado y esquinas redondeadas).
 
-## Code scaffolding
+## Modelo de datos
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+La interfaz `Image` (`src/app/interfaces/image-interface.ts`) tipa cada imagen con tres propiedades, todas de tipo `string`:
 
-```bash
-ng generate component component-name
-```
+- `id`
+- `src`
+- `alt`
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+## Cómo ejecutar el proyecto
 
 ```bash
-ng build
+npm install
+npm start
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Abre el navegador en `http://localhost:4200`. La aplicación se recarga automáticamente al guardar cambios en los ficheros fuente.
 
-## Running unit tests
+## Flujo de Git
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+El desarrollo se realizó en la rama `feature/basic-gallery` y posteriormente se integró en `main` mediante `git merge`.
 
-```bash
-ng test
-```
+## Tecnologías
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Angular (standalone components, Signals, control de flujo nativo `@for`)
+- TypeScript en modo estricto
